@@ -7,10 +7,12 @@
 
 h1 
 {
-	/*margin-left: auto;
-	text-align: center;
-	width: 100vw;
-	position: absolute;*/
+	font-family: 'Cormorant Unicase', serif;
+}
+
+h6
+{
+	font-family: 'Cormorant Infant', serif;
 }
 
 #interface
@@ -18,10 +20,15 @@ h1
 	position: fixed;
 }
 
-#interface-header
+#title-block
 {
 	text-align: center;
 	width: 100vw;
+	height: 60vh;
+	margin-top: 40vh;
+	padding-right: 30px;
+	padding-left: 30px;
+	vertical-align: center;
 	position: absolute;
 }
 
