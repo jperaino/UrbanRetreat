@@ -13,17 +13,6 @@ $(document).ready(function(){
 		var renderer1 = new THREE.WebGLRenderer({ antialias: true });
 		renderer1.setSize( window.innerWidth, window.innerHeight);
 
-		// SET SCENE 2 - - - - - - - Scene, camera, renderer
-    	var scene2 = new THREE.Scene();
-		scene2.background = new THREE.Color( 0x5d99c6 );
-
-		var camera2 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		camera2.position.set(0,0,1);
-
-		var renderer2 = new THREE.WebGLRenderer({ antialias: true });
-		renderer2.setSize( window.innerWidth, window.innerHeight);
-		
-
 		// Add date to copyright 
 		var d = new Date()
 		var year = d.getFullYear()
@@ -35,25 +24,19 @@ $(document).ready(function(){
 
 		// Add WebGL scene to HTML
 		$('#canvasPlaceholder').html( renderer1.domElement );
-		$('#canvas2Placeholder').html( renderer2.domElement );
 
 		controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
 		controls1.enableZoom = false;
 
-		controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
-		controls2.enableZoom = false;
-
-
 		// Add a cube
-		var geometry = new THREE.BoxGeometry(.75,.75,.75);
-		var material = new THREE.MeshBasicMaterial({color: 0xffffff});
-		var cube = new THREE.Mesh(geometry, material);
-		scene1.add( cube );
+		// var geometry = new THREE.BoxGeometry(.75,.75,.75);
+		// var material = new THREE.MeshBasicMaterial({color: 0xffffff});
+		// var cube = new THREE.Mesh(geometry, material);
+		// scene1.add( cube );
 
 	
 		// render the scene
 		render();
-		render2();
 	
 	// MARK: - EVENT LISTENERS --------------------------------------------------------------------
 
@@ -87,23 +70,9 @@ $(document).ready(function(){
 		function render() {
 			requestAnimationFrame( render );
 
-				// Set cube rotation
-				cube.rotation.x += 0.0003
-				cube.rotation.y += 0.0003
-				cube.rotation.z += 0.0003
-
 				// Render scene
 				renderer1.render( scene1, camera1);
 				controls1.update();
-		}
-
-		// Create the render loop
-		function render2() {
-			requestAnimationFrame( render );
-
-				// Render scene
-				renderer2.render( scene2, camera2);
-				controls2.update();
 		}
 
 
@@ -112,7 +81,7 @@ $(document).ready(function(){
 
     // ___GEOMETRY 
 
-    	/*
+    	
 		var loadOBJ = function(){
 			//Manager from ThreeJs to track a loader and its status
 			var manager = new THREE.LoadingManager();
@@ -142,13 +111,13 @@ $(document).ready(function(){
 			});
 			//Add the 3D object in the scene
 			var material = new THREE.MeshBasicMaterial({color: 0xffffff});
-			scene2.add(wavy);
-			render2();
+			scene1.add(wavy);
+			render();
 		};
 		
 		loadOBJ();
 
-		*/
+		
 
 
 
