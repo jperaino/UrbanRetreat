@@ -8,9 +8,9 @@ $(document).ready(function(){
 		scene1.background = new THREE.Color( 0x90caf9 );
 
 		var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		camera1.position.set(0,-2,1.5);
+		camera1.position.set(0,-.55,2);
 		camera1.up = new THREE.Vector3(0,0,1);
-		camera1.lookAt(new THREE.Vector3(0,1,0));
+		camera1.lookAt(new THREE.Vector3(0,5,2));
 
 		var renderer1 = new THREE.WebGLRenderer({ antialias: true });
 		renderer1.setSize( window.innerWidth, window.innerHeight);
@@ -27,8 +27,8 @@ $(document).ready(function(){
 		// Add WebGL scene to HTML
 		$('#canvasPlaceholder').html( renderer1.domElement );
 
-		controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
-		controls1.enableZoom = false;
+		// controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
+		// controls1.enableZoom = false;
 
 		// Add a cube
 		// var geometry = new THREE.BoxGeometry(.75,.75,.75);
@@ -74,7 +74,7 @@ $(document).ready(function(){
 
 				// Render scene
 				renderer1.render( scene1, camera1);
-				controls1.update();
+				// controls1.update();
 		}
 
 
