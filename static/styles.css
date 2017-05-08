@@ -31,7 +31,7 @@ h6
 {
 	text-align: center;
 	width: 100vw;
-	margin-top: 40vh;
+	margin-top: 35vh;
 	padding-right: 30px;
 	padding-left: 30px;
 	vertical-align: center;
@@ -41,4 +41,16 @@ h6
 .btn 
 {
 	margin: 2px;
+}
+
+#crDate
+{
+	font-family: 'Cormorant Infant', serif; 
+}
+
+#footer
+{
+	padding: 10px;
+	background-color: #F5F5F5;
+	height: 60px;
 }

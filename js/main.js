@@ -14,19 +14,11 @@ $(document).ready(function(){
 		renderer.setSize( window.innerWidth, window.innerHeight);
 		//renderer.setClearColorHex(0x333F47, 1);
 
-
-		// Create a light, set its position, and add it to the scene.
-    	var light = new THREE.PointLight(0xffffff);
-    	light.position.set(-100,200,100);
-    	scene.add(light);
-
-		var daLimit = 5;
-
-		var spheres = []
-		var sphereCounter = 0
-
-		var cones = []
-		var coneCounter = 0
+		// Add date to copyright 
+		var d = new Date()
+		var year = d.getFullYear()
+		console.log(year)
+		$('#crDate').html( "<i>Copyright &#169  " + year + " Jim Peraino. All rights reserved.</i>");
 
 
 	// MARK: - ON LOAD DO ----------------------------------------------------------------------------
@@ -35,7 +27,7 @@ $(document).ready(function(){
 		//$('.btn').tooltip({title: "Click me!", animation: true, placement: "right"})
 
 		// Add WebGL scene to HTML
-		document.body.appendChild( renderer.domElement );
+		$('#canvasPlaceholder').html( renderer.domElement );
 
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 
