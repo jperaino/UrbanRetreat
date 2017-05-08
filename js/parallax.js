@@ -8,7 +8,9 @@ $(document).ready(function(){
 		scene1.background = new THREE.Color( 0x90caf9 );
 
 		var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		camera1.position.set(0,0,1);
+		camera1.position.set(0,-2,1.5);
+		camera1.up = new THREE.Vector3(0,0,1);
+		camera1.lookAt(new THREE.Vector3(0,1,0));
 
 		var renderer1 = new THREE.WebGLRenderer({ antialias: true });
 		renderer1.setSize( window.innerWidth, window.innerHeight);
@@ -95,7 +97,7 @@ $(document).ready(function(){
 			wavy = object;
 			//Move the wavy in the scene
 			wavy.rotation.y = 0;
-			wavy.rotation.z = 0;
+			//wavy.rotation.x = -Math.PI/2;
 			wavy.rotation.z = 0;//-Math.PI/2;
 			//wavy.rotation.x = Math.PI/2;
 			wavy.position.y = 0;
