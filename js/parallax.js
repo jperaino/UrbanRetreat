@@ -89,8 +89,7 @@ $(document).ready(function(){
 				camera1.position.x = (( - mouseX + camera1.position.x ) * .002);
 				camera1.position.y = ((  mouseY + camera1.position.y ) * .0002);
 				camera1.lookAt( new THREE.Vector3(0,5,1.5) );
-				console.log(mouseX+","+windowHalfX);
-
+	
 				// Render scene
 				renderer1.render( scene1, camera1);
 				// controls1.update();
@@ -115,10 +114,6 @@ $(document).ready(function(){
 		var addWavyInScene = function(object){
 			wavy = object;
 			//Move the wavy in the scene
-			wavy.rotation.y = 0;
-			//wavy.rotation.x = -Math.PI/2;
-			wavy.rotation.z = 0;//-Math.PI/2;
-			//wavy.rotation.x = Math.PI/2;
 			wavy.position.y = 0;
 			wavy.position.z = 0;
 			//Go through all children of the loaded object and search for a Mesh
@@ -137,6 +132,69 @@ $(document).ready(function(){
 		};
 		
 		loadOBJ();
+
+
+		var loadOBJ2 = function(){
+			//Manager from ThreeJs to track a loader and its status
+			var manager = new THREE.LoadingManager();
+			//Loader for Obj from Three.js
+			var loader = new THREE.OBJLoader( manager );
+			//Launch loading of the obj file, addWavyInScene is the callback when it's ready 
+			loader.load( 'assets/swoop.obj', addSwoopInScene);
+		};
+
+		var addSwoopInScene = function(object){
+			swoop = object;
+			//Move the wavy in the scene
+			swoop.position.y = 0;
+			swoop.position.z = 8;
+			//Go through all children of the loaded object and search for a Mesh
+			object.traverse( function ( child ) {
+				//This allow us to check if the children is an instance of the Mesh constructor
+				if(child instanceof THREE.Mesh){
+					child.material.color = new THREE.Color(0xffffff);
+					//Sometimes there are some vertex normals missing in the .obj files, ThreeJs will compute them
+					child.geometry.computeVertexNormals();
+				}
+			});
+			//Add the 3D object in the scene
+			var material = new THREE.MeshBasicMaterial({color: 0xffffff});
+			scene1.add(swoop);
+			render();
+		};
+		
+		loadOBJ2();
+
+		var loadOBJ3 = function(){
+			//Manager from ThreeJs to track a loader and its status
+			var manager = new THREE.LoadingManager();
+			//Loader for Obj from Three.js
+			var loader = new THREE.OBJLoader( manager );
+			//Launch loading of the obj file, addWavyInScene is the callback when it's ready 
+			loader.load( 'assets/pointy.obj', addPointyInScene);
+		};
+
+		var addPointyInScene = function(object){
+			pointy = object;
+			//Move the wavy in the scene
+			pointy.position.y = 0;
+			pointy.position.z = -8;
+			//Go through all children of the loaded object and search for a Mesh
+			object.traverse( function ( child ) {
+				//This allow us to check if the children is an instance of the Mesh constructor
+				if(child instanceof THREE.Mesh){
+					child.material.color = new THREE.Color(0xffffff);
+					//Sometimes there are some vertex normals missing in the .obj files, ThreeJs will compute them
+					child.geometry.computeVertexNormals();
+				}
+			});
+			//Add the 3D object in the scene
+			var material = new THREE.MeshBasicMaterial({color: 0xffffff});
+			scene1.add(pointy);
+			render();
+		};
+		
+		loadOBJ3();
 
 		
 
