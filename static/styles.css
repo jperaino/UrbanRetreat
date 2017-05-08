@@ -1,0 +1,32 @@
+
+
+.alert
+{
+	margin: 20px;
+}
+
+h1 
+{
+	/*margin-left: auto;
+	text-align: center;
+	width: 100vw;
+	position: absolute;*/
+}
+
+#interface
+{
+	position: fixed;
+}
+
+#interface-header
+{
+	text-align: center;
+	width: 100vw;
+	position: absolute;
+}
+
+
+.btn 
+{
+	margin: 2px;
+}
