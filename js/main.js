@@ -30,7 +30,7 @@ $(document).ready(function(){
 		$('#canvasPlaceholder').html( renderer.domElement );
 
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
-		controls.enableZoom = false;
+		//controls.enableZoom = false;
 
 		// Add a cube
 		var geometry = new THREE.BoxGeometry(.75,.75,.75);
@@ -182,6 +182,42 @@ $(document).ready(function(){
 			animate();
 
 		}
+
+
+		var loadOBJ = function(){
+			//Manager from ThreeJs to track a loader and its status
+			var manager = new THREE.LoadingManager();
+			//Loader for Obj from Three.js
+			var loader = new THREE.OBJLoader( manager );
+			//Launch loading of the obj file, addWavyInScene is the callback when it's ready 
+			loader.load( 'assets/wavyShaker.obj', addWavyInScene);
+		};
+
+		var addWavyInScene = function(object){
+			wavy = object;
+			//Move the wavy in the scene
+			wavy.rotation.y = 0;
+			wavy.rotation.z = 0;
+			wavy.rotation.z = 0;//-Math.PI/2;
+			//wavy.rotation.x = Math.PI/2;
+			wavy.position.y = 0;
+			wavy.position.z = 0;
+			//Go through all children of the loaded object and search for a Mesh
+			object.traverse( function ( child ) {
+				//This allow us to check if the children is an instance of the Mesh constructor
+				if(child instanceof THREE.Mesh){
+					child.material.color = new THREE.Color(0xffffff);
+					//Sometimes there are some vertex normals missing in the .obj files, ThreeJs will compute them
+					child.geometry.computeVertexNormals();
+				}
+			});
+			//Add the 3D object in the scene
+			scene.add(wavy);
+			render();
+		};
+		
+		loadOBJ();
+
 
 
 });
