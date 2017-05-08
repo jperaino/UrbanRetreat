@@ -15,6 +15,10 @@ $(document).ready(function(){
 		var renderer1 = new THREE.WebGLRenderer({ antialias: true });
 		renderer1.setSize( window.innerWidth, window.innerHeight);
 
+		var mouseX = 0, mouseY = 0;
+		var windowHalfX = window.innerWidth / 2;
+		var windowHalfY = window.innerHeight / 2;
+
 		// Add date to copyright 
 		var d = new Date()
 		var year = d.getFullYear()
@@ -50,6 +54,9 @@ $(document).ready(function(){
 			$("#scrollNotice").css("opacity", 1 - $(window).scrollTop() / 50);
 		});
 
+		// Mouse movement
+		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
 	// MARK: - ACTIONS ----------------------------------------------------------------------------
 
     	// Keep the view boundary updated
@@ -63,6 +70,12 @@ $(document).ready(function(){
 			renderer2.setSize( window.innerWidth, window.innerHeight );
 		}
 
+		function onDocumentMouseMove(event) {
+				mouseX = ( event.clientX - windowHalfX ) * 10;
+				mouseY = ( event.clientY - windowHalfY ) * 10;
+			}
+
+
 	// MARK: - METHODS ----------------------------------------------------------------------------
 
 
@@ -72,6 +85,10 @@ $(document).ready(function(){
 		function render() {
 			requestAnimationFrame( render );
 
+				camera1.position.x = ( - mouseX + camera1.position.x ) * .001;
+				camera1.position.y = (  mouseY + camera1.position.y ) * .001;
+				camera1.lookAt( scene1.position );
+				console.log(camera1.position.x);
 				// Render scene
 				renderer1.render( scene1, camera1);
 				// controls1.update();
