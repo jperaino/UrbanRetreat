@@ -61,8 +61,8 @@ h6
 
 #scrollNotice
 {
-	position: absolute;
-	margin-top: 60vh;
+	position: fixed;
+	margin-top: 85vh;
 	text-align: center;
 	font-family: 'Cormorant Unicase', serif;
 	width: 100%;
@@ -80,10 +80,29 @@ h6
 	position: absolute;
 }
 
-.btn 
-{
-	margin: 2px;
+#canvasPlaceholder{
+	background-color: var(--primeDark);
 }
+
+#canvas3Placeholder{
+	background-color: var(--primeMedium);
+	width: 400px;
+	height: 400px;
+	float: left;
+}
+
+#canvas4Placeholder{
+	background-color: var(--secondMedium);
+	width: 400px;
+	height: 400px;
+	float: left;
+}
+
+#summary{
+	padding-top: 20px;
+	font-family: 'Cormorant Infant', serif;
+}
+
 
 #crDate
 {
@@ -99,6 +118,6 @@ h6
 
 #parralax
 {
-	height: 600px;
 	background-color: var(--primeDark);
+	
 }

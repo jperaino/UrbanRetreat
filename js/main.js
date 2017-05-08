@@ -3,16 +3,26 @@ $(document).ready(function(){
 
     // MARK: - PROPERTIES ----------------------------------------------------------------------------
 
-    	// Scene, camera, renderer
-    	var scene = new THREE.Scene();
-		scene.background = new THREE.Color( 0x90caf9 );
+    	// SET SCENE 1 - - - - - - - Scene, camera, renderer
+    	var scene1 = new THREE.Scene();
+		scene1.background = new THREE.Color( 0x90caf9 );
 
-		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		camera.position.set(0,0,1);
+		var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		camera1.position.set(0,0,1);
 
-		var renderer = new THREE.WebGLRenderer({ antialias: true });
-		renderer.setSize( window.innerWidth, window.innerHeight);
-		//renderer.setClearColorHex(0x333F47, 1);
+		var renderer1 = new THREE.WebGLRenderer({ antialias: true });
+		renderer1.setSize( window.innerWidth, window.innerHeight);
+
+		// SET SCENE 2 - - - - - - - Scene, camera, renderer
+    	var scene2 = new THREE.Scene();
+		scene2.background = new THREE.Color( 0x5d99c6 );
+
+		var camera2 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		camera2.position.set(0,0,1);
+
+		var renderer2 = new THREE.WebGLRenderer({ antialias: true });
+		renderer2.setSize( window.innerWidth, window.innerHeight);
+		
 
 		// Add date to copyright 
 		var d = new Date()
@@ -23,29 +33,27 @@ $(document).ready(function(){
 
 	// MARK: - ON LOAD DO ----------------------------------------------------------------------------
 
-		// Add tooltips
-		//$('.btn').tooltip({title: "Click me!", animation: true, placement: "right"})
-
 		// Add WebGL scene to HTML
-		$('#canvasPlaceholder').html( renderer.domElement );
+		$('#canvasPlaceholder').html( renderer1.domElement );
+		$('#canvas2Placeholder').html( renderer2.domElement );
 
-		controls = new THREE.OrbitControls(camera, renderer.domElement);
-		//controls.enableZoom = false;
+		controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
+		controls1.enableZoom = false;
+
+		controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
+		controls2.enableZoom = false;
+
 
 		// Add a cube
 		var geometry = new THREE.BoxGeometry(.75,.75,.75);
 		var material = new THREE.MeshBasicMaterial({color: 0xffffff});
 		var cube = new THREE.Mesh(geometry, material);
-		scene.add( cube );
-
-		// Set the background color
-		//renderer.setClearColorHex(0x333F47, 1);
+		scene1.add( cube );
 
 	
 		// render the scene
 		render();
-	
-
+		render2();
 	
 	// MARK: - EVENT LISTENERS --------------------------------------------------------------------
 
@@ -54,30 +62,15 @@ $(document).ready(function(){
 
 	// MARK: - ACTIONS ----------------------------------------------------------------------------
 
-		// Do something when the button is pushed
-		$('#coneButton').on('click', function() {
-	    	//bootstrap_alert.warning('Added a shape');
-	    	//alertTimeout(1500);
-	    	addConeOnClick()
-    	});
-
-    	$('#sphereButton').on('click', function() {
-	    	//bootstrap_alert.warning('Added a shape');
-	    	//alertTimeout(1500);
-	    	addSphereOnClick()
-    	});
-
-    	$('#clearButton').on('click', function() {
-	    	bootstrap_alert.warning('deleted all shapes');
-	    	alertTimeout(1500);
-	    	removeShapeOnClick()
-    	});
-
     	// Keep the view boundary updated
     	function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize( window.innerWidth, window.innerHeight );
+			camera1.aspect = window.innerWidth / window.innerHeight;
+			camera1.updateProjectionMatrix();
+			renderer1.setSize( window.innerWidth, window.innerHeight );
+
+			camera2.aspect = window.innerWidth / window.innerHeight;
+			camera2.updateProjectionMatrix();
+			renderer2.setSize( window.innerWidth, window.innerHeight );
 		}
 
 	// MARK: - METHODS ----------------------------------------------------------------------------
@@ -90,98 +83,29 @@ $(document).ready(function(){
 			requestAnimationFrame( render );
 
 				// Set cube rotation
-				cube.rotation.x += 0.001
-				cube.rotation.y += 0.001
-				cube.rotation.z += 0.001
+				cube.rotation.x += 0.0003
+				cube.rotation.y += 0.0003
+				cube.rotation.z += 0.0003
 
 				// Render scene
-				renderer.render( scene, camera);
-				controls.update();
+				renderer1.render( scene1, camera1);
+				controls1.update();
+		}
+
+		// Create the render loop
+		function render2() {
+			requestAnimationFrame( render );
+
+				// Render scene
+				renderer2.render( scene2, camera2);
+				controls2.update();
 		}
 
 
 	// ___ALERTS
 
-		// Initialize success alert
-		bootstrap_alert = function () {}
-    	bootstrap_alert.warning = function(message) {
-    	$('#placeholder-alert').html('<div class="alert alert-success fade in"><a class="close" data-dismiss="alert">×</a><span><strong>Message: </strong>'+message+'</span></div>')
-   		}
-
-		// Fade alerts out automatically
-		function alertTimeout(wait){
-	    	setTimeout(function(){
-	    		$('#placeholder-alert').children('.alert:first-child').alert('close');
-	    	}, wait);
-	    }
 
     // ___GEOMETRY 
-
-    	// Add a sphere on a click
-		function addSphereOnClick() {
-
-			var sphereGeo = new THREE.SphereGeometry(.5, 32, 32);
-			var sphereMat = new THREE.MeshBasicMaterial({color: 0xc3fdff});
-			var sphere = new THREE.Mesh( sphereGeo, sphereMat);
-			
-			sphere.name = "sphereName"+sphereCounter
-			
-			sphere.position.x = Math.random() * daLimit
-			sphere.position.y = Math.random() * daLimit 
-			sphere.position.z = Math.random() * daLimit 
-
-			scene.add( sphere );
-
-			spheres.push(sphereCounter)
-			sphereCounter += 1
-			console.log(spheres)
-			
-		}
-
-		// Add a cone on a click
-		function addConeOnClick() {
-
-			var coneGeo = new THREE.ConeGeometry(.5, 1, 64);
-			var coneMat = new THREE.MeshBasicMaterial({color: 0x008ba3});
-			var cone = new THREE.Mesh( coneGeo, coneMat);
-
-			cone.name = "coneName"+coneCounter
-
-			cone.position.x = Math.random() * daLimit
-			cone.position.y = Math.random() * daLimit 
-			cone.position.z = Math.random() * daLimit 
-
-			scene.add( cone );
-
-			cones.push(coneCounter)
-			coneCounter += 1
-			console.log(cones)
-		}
-
-		// Remove shapes
-		function removeShapeOnClick() {
-
-			for( i = 0; i < spheres.length; i++) {
-				var selectedObject = scene.getObjectByName("sphereName"+spheres[i]);
-				console.log(selectedObject.name)
-				scene.remove(selectedObject);
-			}
-
-			for( i = 0; i < cones.length; i++) {
-				var selectedObject = scene.getObjectByName("coneName"+cones[i]);
-				console.log(selectedObject.name)
-				scene.remove(selectedObject);
-			}
-
-			spheres = []
-			sphereCounter = 0
-
-			cones = []
-			coneCounter = 0
-
-			animate();
-
-		}
 
 
 		var loadOBJ = function(){
@@ -212,8 +136,9 @@ $(document).ready(function(){
 				}
 			});
 			//Add the 3D object in the scene
-			scene.add(wavy);
-			render();
+			var material = new THREE.MeshBasicMaterial({color: 0xffffff});
+			scene2.add(wavy);
+			render2();
 		};
 		
 		loadOBJ();
