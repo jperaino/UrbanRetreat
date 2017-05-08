@@ -60,6 +60,11 @@ $(document).ready(function(){
 		// Listen for window resize
 		window.addEventListener( 'resize', onWindowResize, false );
 
+		// Hide Scroll icon on scroll
+		$(window).scroll(function(){
+			$("#scrollNotice").css("opacity", 1 - $(window).scrollTop() / 50);
+		});
+
 	// MARK: - ACTIONS ----------------------------------------------------------------------------
 
     	// Keep the view boundary updated
