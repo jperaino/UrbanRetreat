@@ -30,6 +30,7 @@ $(document).ready(function(){
 		$('#canvasPlaceholder').html( renderer.domElement );
 
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
+		controls.enableZoom = false;
 
 		// Add a cube
 		var geometry = new THREE.BoxGeometry(.75,.75,.75);
