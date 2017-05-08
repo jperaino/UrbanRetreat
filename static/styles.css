@@ -1,5 +1,3 @@
-
-
 .alert
 {
 	margin: 20px;
@@ -15,23 +13,30 @@ h6
 	font-family: 'Cormorant Infant', serif;
 }
 
-#interface
+#jpLogoWhite.png
+
+#navbar
 {
-	position: fixed;
+	position: absolute;
+}
+
+#icon
+{
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 #title-block
 {
 	text-align: center;
 	width: 100vw;
-	
 	margin-top: 40vh;
 	padding-right: 30px;
 	padding-left: 30px;
 	vertical-align: center;
 	position: absolute;
 }
-
 
 .btn 
 {
