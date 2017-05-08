@@ -8,7 +8,7 @@ $(document).ready(function(){
 		scene1.background = new THREE.Color( 0x90caf9 );
 
 		var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		camera1.position.set(0,-.55,2);
+		camera1.position.set(0,0,1.5);
 		camera1.up = new THREE.Vector3(0,0,1);
 		camera1.lookAt(new THREE.Vector3(0,5,2));
 
@@ -65,9 +65,8 @@ $(document).ready(function(){
 			camera1.updateProjectionMatrix();
 			renderer1.setSize( window.innerWidth, window.innerHeight );
 
-			camera2.aspect = window.innerWidth / window.innerHeight;
-			camera2.updateProjectionMatrix();
-			renderer2.setSize( window.innerWidth, window.innerHeight );
+			windowHalfX = window.innerWidth / 2;
+			windowHalfY = window.innerHeight / 2;
 		}
 
 		function onDocumentMouseMove(event) {
@@ -85,10 +84,13 @@ $(document).ready(function(){
 		function render() {
 			requestAnimationFrame( render );
 
-				camera1.position.x = ( - mouseX + camera1.position.x ) * .001;
-				camera1.position.y = (  mouseY + camera1.position.y ) * .001;
-				camera1.lookAt( scene1.position );
-				console.log(camera1.position.x);
+				//xFactor = Math.abs(mouseX/windowHalfX/10);
+
+				camera1.position.x = (( - mouseX + camera1.position.x ) * .002);
+				camera1.position.y = ((  mouseY + camera1.position.y ) * .0002);
+				camera1.lookAt( new THREE.Vector3(0,5,1.5) );
+				console.log(mouseX+","+windowHalfX);
+
 				// Render scene
 				renderer1.render( scene1, camera1);
 				// controls1.update();
