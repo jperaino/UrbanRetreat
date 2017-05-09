@@ -97,10 +97,21 @@ $(document).ready(function(){
 		function render() {
 			requestAnimationFrame( render );
 
-				//xFactor = Math.abs(mouseX/windowHalfX/10);
+				xF = mouseX/windowHalfX/10;
+				yF = mouseY/windowHalfY/10;
 
-				camera1.position.x = (( - mouseX + camera1.position.x ) * .002);
-				camera1.position.y = ((  mouseY + camera1.position.y ) * .0002);
+				var cutX = .65
+				var difX = Math.abs((Math.abs(xF) - cutX)/(1 - cutX))
+				var difXSmooth = difX * difX * difX
+
+				var cutY = .65
+				var difY = Math.abs((Math.abs(yF) - cutY)/(1 - cutY))
+				var difYSmooth = difY * difY * difY
+
+
+				camera1.position.x =  (xF > cutX || xF < -(cutX)) ? ((xF)* (.75 + (difXSmooth * 9.25))) : ((xF) * .75);
+				camera1.position.y =  (yF > cutY || yF < -(cutY)) ? ((yF)* (.75 + (difYSmooth * 9.25))) : ((yF) * .75);
+
 				camera1.lookAt( new THREE.Vector3(0,5,1.5) );
 	
 				// Render scene
