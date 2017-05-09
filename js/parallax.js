@@ -57,6 +57,19 @@ $(document).ready(function(){
 		// Mouse movement
 		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
+		document.addEventListener('keydown', function(event) {
+    		switch (event.keyCode) {
+    			case 38:
+    				console.log("Up key is pressed");
+    				break;
+				case 40:
+					console.log("Down key is pressed");
+					break;
+				default:
+					break;
+    		}
+        }, false);
+
 	// MARK: - ACTIONS ----------------------------------------------------------------------------
 
     	// Keep the view boundary updated
@@ -95,8 +108,6 @@ $(document).ready(function(){
 				// controls1.update();
 		}
 
-
-	// ___ALERTS
 
 
     // ___GEOMETRY 
